@@ -50,3 +50,13 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Zip data
+*.gz
+*.tar
+*.zip
+*.diff
+
+# Ignore file
+*.orig
+*.rej
