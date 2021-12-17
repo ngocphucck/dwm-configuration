@@ -15,7 +15,7 @@ After that, you need to download the source from our repository :
 $ cd /usr/local/src
 $ sudo git clone https://github.com/ngocphucck/dwm-configuration.git
 $ cd ..
-$ chown -R `id -u`:`id -g` dwm-6.2
+$ chown -R `id -u`:`id -g` dwm-configuration
 ```
 Next, you need to build the project:
 ```shell
