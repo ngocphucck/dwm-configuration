@@ -191,7 +191,7 @@ static void detachstack(Client *c);
 static Monitor *dirtomon(int dir);
 static void drawbar(Monitor *m);
 static void drawbars(void);
-static int drawstatusbar(Monitor *m, int bh, char* text);
+static int drawstatusbar(Monitor *m, int bh, int systray, char* text);
 static void enternotify(XEvent *e);
 static void expose(XEvent *e);
 static void focus(Client *c);
@@ -813,7 +813,7 @@ dirtomon(int dir)
 }
 
 int
-drawstatusbar(Monitor *m, int bh, char* stext) {
+drawstatusbar(Monitor *m, int bh, int systray, char* stext) {
 	int ret, i, w, x, len;
 	short isCode = 0;
 	char *text;
@@ -851,7 +851,7 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
 	text = p;
 
 	w += 2; /* 1px padding on both sides */
-	ret = x = m->ww - w;
+	ret = x = m->ww - w - systray;
 
 	drw_setscheme(drw, scheme[LENGTH(colors)]);
 	drw->scheme[ColFg] = scheme[SchemeNorm][ColFg];
@@ -934,7 +934,7 @@ drawbar(Monitor *m)
 
 	/* draw status first so it can be overdrawn by tags later */
 	if (m == selmon) { /* status is only drawn on selected monitor */
-		tw = m->ww - drawstatusbar(m, bh, stext);
+		tw = m->ww- drawstatusbar(m, bh, stw, stext) - stw;
 	}
 
 	resizebarwin(m);
@@ -963,6 +963,7 @@ drawbar(Monitor *m)
 	x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
 
 	if ((w = m->ww - tw - stw - x) > bh) {
+		/*
 		if (n > 0) {
 			int remainder = w % n;
 			int tabw = (1.0 / (double)n) * w + 1;
@@ -986,14 +987,11 @@ drawbar(Monitor *m)
 				drw_text(drw, x, 0, tabw, bh, lrpad / 2, c->name, 0);
 				x += tabw;
 			}
-		} else {
+		} else { */
 			drw_setscheme(drw, scheme[SchemeNorm]);
 			drw_rect(drw, x, 0, w, bh, 1, 1);
-		}
 	}
 
-	m->bt = n;
-	m->btw = w;
 	drw_map(drw, m->barwin, 0, 0, m->ww - stw, bh);
 }
 
