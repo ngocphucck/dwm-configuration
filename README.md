@@ -1,5 +1,5 @@
-dwm - dynamic window manager
-============================
+dwm - dynamic window manager on Ubuntu :smile_cat:
+==================================================
 DWM is a dynamic, keyboard-driven, tiling window manager developed by [*Suckless*](https://suckless.org/). It's is an extremely fast, small, and dynamic window manager for X.
 
 This repository includes some patchings to build a beautiful wm. My source code is based on [siduck's github](https://github.com/siduck/chadwm) <3. 
